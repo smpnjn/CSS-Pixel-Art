@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>CSS Pixel Art Generator</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class="article-link">
+            <a href="https://fjolt.com/article/css-pixel-art-generator" target="blank">Read the article</a>
+          </div>
+          <div id="pixel-art-options">
+              <button class="generate-css">
+                  <span class="generate-css-span">Generate CSS</span>
+              </button>
+              <button class="reset">
+                  <span><i class="fal fa-sync"></i></span>
+              </button>
+              <div class="eraser-container">
+                  <div class="eraser"><i class="fal fa-eraser"></i></div>
+              </div>
+              <div class="colors">
+                  <div class="color current" style="background: white;" data-color="white"></div>
+                  <div class="color" style="background: #ffc231;" data-color="#ffc231"></div>
+                  <div class="color" style="background: #ff6c31;" data-color="#ff6c31"></div>
+                  <div class="color" style="background: #ff1c1c;" data-color="#ff1c1c"></div>
+                  <div class="color" style="background: #35c161;" data-color="#35c161"></div>
+                  <div class="color" style="background: #3552c1;" data-color="#3552c1"></div>
+                  <div class="color" style="background: #7935c1;" data-color="#7935c1"></div>
+                  <input type="color" class="color-picker" />
+              </div>
+              <div class="prebuilt">
+                  <div class="prebuilt current" data-prebuilt="blank">Demoes</div>
+                  <div class="options">
+                      <div class="prebuilt" data-prebuilt="mario">Mario</div>
+                      <div class="prebuilt" data-prebuilt="yoshi">Yoshi</div>
+                      <div class="prebuilt" data-prebuilt="babomb">Babomb</div>
+                  </div>
+              </div>
+          </div>
+          <div id="pixel-art-area">
+          </div>
+          <div id="popup-pixel-art">
+              <h2>Pixel Art Code</h2>
+              <p>Copy the code below to use this on your webpage</p>
+              <div class="close"><i class="fal fa-times"></i></div>
+          </div>
+          <script src="local.js"></script>
+    </body>
+</html>
