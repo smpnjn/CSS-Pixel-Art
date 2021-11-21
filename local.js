@@ -1,3 +1,4 @@
+
 let prebuilt = {
     mario: [
         { x: 7, y: 0, color: '#500000' },
@@ -994,20 +995,18 @@ for(let i = 0; i < config.width; ++i) {
     }
 }
 
-if(config.drawing === true) {
-    document.querySelectorAll('.pixel').forEach(function(item) {
-        item.addEventListener('pointerdown', function(e) {
-            if(config.eraser === true) {
-                item.setAttribute('data-color', null);
-                item.style.background = `#101532`;
-            } else {
-                item.setAttribute('data-color', config.color);
-                item.style.background = `${config.color}`;
-            }
-            events.mousedown = true;
-        });
+document.querySelectorAll('.pixel').forEach(function(item) {
+    item.addEventListener('pointerdown', function(e) {
+        if(config.eraser === true) {
+            item.setAttribute('data-color', null);
+            item.style.background = `#101532`;
+        } else {
+            item.setAttribute('data-color', config.color);
+            item.style.background = `${config.color}`;
+        }
+        events.mousedown = true;
     });
-}
+});
 
 document.getElementById('pixel-art-area').addEventListener('pointermove', function(e) {
     if(config.drawing === true && events.mousedown === true || config.eraser === true && events.mousedown === true) {
@@ -1039,6 +1038,19 @@ document.body.addEventListener('pointerup', function(e) {
     });
 });
 
+document.querySelectorAll('.colors > div').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+        document.querySelector('.color-picker').classList.remove('current');
+        document.querySelectorAll('.colors > div').forEach(function(i) {
+            i.classList.remove('current');
+        })
+        item.classList.add('current');
+        config.eraser = false;
+        config.color = `${item.getAttribute('data-color')}`;
+        document.querySelector('.eraser').classList.remove('current');
+    })
+});
+
 document.querySelector('.reset').addEventListener('click', function(e) {
     document.querySelectorAll('.pixel').forEach(function(item) {
         item.setAttribute('data-color', null)
@@ -1059,19 +1071,6 @@ document.body.addEventListener('click', function(e) {
         document.querySelector('.prebuilt .options').classList.remove('active');
     }
 })
-
-document.querySelectorAll('.colors > div').forEach(function(item) {
-    item.addEventListener('click', function(e) {
-        document.querySelector('.color-picker').classList.remove('current');
-        document.querySelectorAll('.colors > div').forEach(function(i) {
-            i.classList.remove('current');
-        })
-        item.classList.add('current');
-        config.eraser = false;
-        config.color = `${item.getAttribute('data-color')}`;
-        document.querySelector('.eraser').classList.remove('current');
-    })
-});
 
 document.querySelectorAll('.options > .prebuilt').forEach(function(item) {
     item.addEventListener('pointerdown', function(e) {
@@ -1137,6 +1136,8 @@ document.querySelector('.generate-css').addEventListener('click', function(e) {
 
     let boxShadowCode = 
         `
+&lt;<span class="token tag">div</span> <span class="token attr-name">class</span>="<span class="token attr-value">pixelart</span>">&lt;/<span class="token attr-name">div</span>>
+&lt;<span class="token tag">style</span> <span class="token attr-name">type</span>="<span class="token attr-value">text/css</span>">
 <span class="token selector">.pixelart</span> {
     <span class="token property">width</span>: <span class="token number">1</span>px;
     <span class="token property">height</span>: <span class="token number">1</span>px;
@@ -1156,7 +1157,8 @@ document.querySelector('.generate-css').addEventListener('click', function(e) {
 
     boxShadowCode = boxShadowCode.slice(0, -2);
     boxShadowCode = `${boxShadowCode};
-}`
+}
+&lt;/<span class="token tag">style</span>>`
 
     let newStyle = document.createElement('style');
     newStyle.innerHTML = boxShadow;
@@ -1195,4 +1197,3 @@ const parent = function(el, match, last) {
 		return result;
 	}
 };
-
